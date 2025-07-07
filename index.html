@@ -114,42 +114,43 @@
 </head>
 <body class="bg-gray-50 text-gray-800 leading-relaxed">
 
-  <section id="contacto" class="py-16">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h3 class="text-3xl font-bold mb-6 text-black">Contacto</h3>
-      <form id="contactForm" class="grid gap-4">
-        <input type="text" name="nombre" required placeholder="Nombre completo" class="p-3 rounded border">
-        <input type="email" name="email" required placeholder="Correo electrónico" class="p-3 rounded border">
-        <textarea name="mensaje" rows="4" required placeholder="Tu mensaje" class="p-3 rounded border"></textarea>
-        <button type="submit" class="bg-black text-white font-semibold px-6 py-2 rounded hover:bg-yellow-600 transition">Enviar mensaje</button>
-      </form>
-      <p id="responseMsg" class="mt-4 text-green-600 font-semibold hidden">¡Gracias! Tu mensaje ha sido enviado.</p>
-    </div>
-  </section>
+<section id="contacto" class="py-16">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h3 class="text-3xl font-bold mb-6 text-black">Contáctanos</h3>
+    <form id="contactForm" class="grid gap-4">
+      <input type="text" name="nombre" required placeholder="Nombre completo" class="p-3 rounded border">
+      <input type="email" name="email" required placeholder="Correo electrónico" class="p-3 rounded border">
+      <textarea name="mensaje" rows="4" required placeholder="Tu mensaje" class="p-3 rounded border"></textarea>
+      <button type="submit" class="bg-black text-white font-semibold px-6 py-2 rounded hover:bg-yellow-600 transition">Enviar mensaje</button>
+    </form>
+    <p id="responseMsg" class="mt-4 text-green-600 font-semibold hidden">¡Gracias! Tu mensaje ha sido enviado correctamente.</p>
+  </div>
+</section>
 
-  <script>
-    const form = document.getElementById('contactForm');
-    const responseMsg = document.getElementById('responseMsg');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const data = {
-        nombre: form.nombre.value,
-        email: form.email.value,
-        mensaje: form.mensaje.value
-      };
-      fetch('https://script.google.com/macros/s/AKfycbypOv4jQorC0ia7iJt6hfemegqHtbiVZIqES_AuQGg8Cx2eYxMxm7XfoDyY85VGthMQ6Q/exec', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.json())
-      .then(response => {
-        form.reset();
-        responseMsg.classList.remove('hidden');
-      })
-      .catch(error => console.error('Error:', error));
-    });
-  </script>
+<script>
+const form = document.getElementById('contactForm');
+const responseMsg = document.getElementById('responseMsg');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const data = {
+    nombre: form.nombre.value,
+    email: form.email.value,
+    mensaje: form.mensaje.value
+  };
+  fetch('https://script.google.com/macros/s/AKfycbwq_9itqTSO-1_KAFF_NII6-8pX-Z6_pHe9V6zP4YtURpfH24gPwqYObodnojWmAA9JEA/exec', {
+    method: 'POST',
+    mode: 'no-cors', // evita error de CORS, los datos sí llegan
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(() => {
+    form.reset();
+    responseMsg.classList.remove('hidden');
+  }).catch(error => {
+    console.error('Error:', error);
+  });
+});
+</script>
 
 </body>
 </html>
@@ -161,4 +162,3 @@
   </footer>
 </body>
 </html>
-
